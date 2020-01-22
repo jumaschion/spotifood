@@ -1,10 +1,11 @@
 {
-  "name": "oauth-bridge-template",
+  "name": "@spotifood-julia/server",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "serve": "node server.js",
+    "start": "./run-local.sh"
   },
   "dependencies": {
     "express": "^4.15.4",

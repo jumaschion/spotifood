@@ -1,37 +1,18 @@
 {
   "name": "spotifood-julia",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.0",
-    "query-string": "^6.9.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0",
-    "styled-components": "^4.4.1"
-  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jumaschion/spotifood.git",
+  "author": "<julia.maschion@ifood.com.br>",
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "postinstall": "lerna bootstrap",
+    "start:app": "lerna run --scope @spotifood-julia/app start",
+    "start:server": "lerna run --scope @spotifood-julia/server start",
+    "start": "concurrently \"yarn start:app\" \"yarn start:server\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "lerna": "^3.20.2"
   }
 }
