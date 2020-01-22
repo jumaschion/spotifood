@@ -1,41 +1,27 @@
-import React, { Component } from 'react';
-
 import  Button from '../Button/Button'
 import { Content } from './LoginStyle';
+import React from 'react';
 
-class Login extends Component {
-  state = { 
-    loading: false
-  };
+const redirectToSpotifyLogin = () => {
+  window.location = "http://localhost:8888/login";
+}
 
-  redirect = () => {
-    console.log("click")
-  //   const { history } = this.props;
-  //   history.push('/http://localhost:8888');
-   }
-
-  
-
-  render()  {
-    return (
-      <>
-
-      <Content>
-        <div>
-          <h1>Olá</h1>
-     
-        </div>
-        <Button
-          width="250px"
-          size="18px"
-          padding="25px 0"
-          onClick={this.redirect}
-        />
-
-      </Content>
-    </>
-    )
-  };
+const Login = () => {
+  return (
+    <Content>
+      <div>
+        <h1>Login</h1>
+      </div>
+      <Button
+        width="250px"
+        size="18px"
+        padding="25px 0"
+        onClick={redirectToSpotifyLogin}
+      >
+      Fazer login
+      </Button>
+    </Content>
+  )
 }
 
 

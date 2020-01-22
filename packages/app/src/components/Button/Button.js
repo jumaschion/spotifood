@@ -9,7 +9,7 @@ const Button = ({
   borderRadius,
   margin,
   width,
-  text,
+  children,
   padding,
   size,
   disabled,
@@ -24,7 +24,7 @@ const Button = ({
     size={size}
     disabled={disabled}
   >
-    <Text>{text}</Text>
+    <Text>{children}</Text>
   </ButtonStyle>
 );
 
@@ -45,7 +45,6 @@ Button.defaultProps = {
   borderRadius: '10px',
   border: '1px solid #3FBFBF',
   width: '200px',
-  text:  <a href='http://localhost:8888'> Login to Spotify </a>,
   padding: '16px',
   size: '16px',
   disabled: false,

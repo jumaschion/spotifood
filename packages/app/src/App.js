@@ -2,24 +2,26 @@ import "./App.css";
 
 import React, { Component } from "react";
 
-import Filter from "./components/Filter/Filter";
-import Playlist from "./components/Playlist";
+import Home from "./components/Home";
+import Login from "./components/Login/Login";
 import queryString from "query-string";
 
 class App extends Component {
   state = {
-    serverData: {},
-    filterString: ""
+    user: undefined,
+    accessToken: undefined
   };
 
   componentDidMount() {
     let parsed = queryString.parse(window.location.search);
     let accessToken = parsed.access_token;
     if (!accessToken) return;
+
+    this.setState({ accessToken });
+
     fetch("https://api.spotify.com/v1/me", {
       headers: { Authorization: "Bearer " + accessToken }
-    })
-      .then(response => response.json())
+    }).then(response => response.json())
       .then(data =>
         this.setState({
           user: {
@@ -27,60 +29,13 @@ class App extends Component {
           }
         })
       );
-
-    fetch("https://api.spotify.com/v1/me/playlists", {
-      headers: { Authorization: "Bearer " + accessToken }
-    })
-      .then(response => response.json())
-      .then(data =>
-        this.setState({
-          playlists: data.items.map(item => {
-            // console.log(data.items)
-            console.log({ item });
-            return {
-              ...item,
-              // name: item.name,
-              imageUrl: item.images[0].url,
-              songs: []
-            };
-          })
-        })
-      );
   }
   render() {
-    const { playlists, user, filterString } = this.state;
-    const playlistToRender =
-      user && playlists
-        ? playlists.filter(playlist =>
-            playlist.name.toLowerCase().includes(filterString.toLowerCase())
-          )
-        : [];
+    const { accessToken, user } = this.state;
+  
     return (
       <div className="App">
-        {user ? (
-          <div>
-            <h1>{user.name}'s Playlists</h1>
-
-            <Filter
-              onTextChange={text => {
-                this.setState({ filterString: text });
-              }}
-            />
-            {playlistToRender.map(playlist => (
-              <Playlist playlist={playlist} />
-            ))}
-          </div>
-        ) : (
-          <button
-            onClick={() => {
-              window.location = window.location.href.includes("localhost")
-                ? "http://localhost:8888/login"
-                : "https://better-playlists-backend.herokuapp.com/login";
-            }}
-          >
-            Sign in with Spotify
-          </button>
-        )}
+        {accessToken ? <Home accessToken={accessToken} user={user} /> : <Login />}
       </div>
     );
   }
