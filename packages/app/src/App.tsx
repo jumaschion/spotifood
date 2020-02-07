@@ -35,7 +35,7 @@ class App extends Component {
   
     return (
       <div className="App">
-        {accessToken ? <Home accessToken={accessToken} user={user} /> : <Login />}
+        {accessToken ? <Home accessToken={accessToken} /> : <Login />}
       </div>
     );
   }

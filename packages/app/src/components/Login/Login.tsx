@@ -3,7 +3,7 @@ import { Content } from './LoginStyle';
 import React from 'react';
 
 const redirectToSpotifyLogin = () => {
-  window.location = "http://localhost:8888/login";
+  window.location.href = "http://localhost:8888/login";
 }
 
 const Login = () => {

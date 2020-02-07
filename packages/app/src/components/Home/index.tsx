@@ -1,9 +1,22 @@
 import React, { Component } from "react";
 
 import Filter from "../Filter/Filter";
-import Playlist from "../Playlist";
+import PlaylistComponent from "../Playlist";
 
-class Home extends Component {
+interface Playlist {
+  items: any[]
+}
+
+interface HomeProps {
+  accessToken: string
+}
+
+interface HomeState {
+  playlists: Playlist[],
+  filterString: string
+}
+
+class Home extends Component<HomeProps, HomeState> {
   state = {
     playlists: [],
     filterString: ""
@@ -16,7 +29,7 @@ class Home extends Component {
       headers: { Authorization: "Bearer " + accessToken }
     })
     .then(response => response.json())
-    .then(data =>
+    .then((data: Playlist) =>
       this.setState({
         playlists: data.items.map(item => {
           // console.log(data.items)
@@ -52,7 +65,7 @@ class Home extends Component {
             No playlist to render :(
           </div>
         ) : filteredPlaylist.map(playlist => (
-          <Playlist playlist={playlist} />
+          <PlaylistComponent playlist={playlist} />
         ))}
       </div>
     );

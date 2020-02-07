@@ -2,8 +2,12 @@ import React, { Component } from "react";
 
 import { PlaylistStyle } from "./PlaylistStyle";
 
+interface PlaylistProps {
+  playlist: any
+}
+
 //"https://open.spotify.com/playlist/5wNRJwSnBImUuZXJW1TiAj"
-class Playlist extends Component {
+class Playlist extends Component<PlaylistProps> {
   render() {
     let playlist = this.props.playlist;
     return (
